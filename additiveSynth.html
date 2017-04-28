@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<body>
+  <div
+  style="background:green; height:400px;"
+  tabindex="0"
+  onkeydown="playSynth()"
+  >
+  </div>
+</body>
+<script>
+var audio_context = window.AudioContext || window
+  .webkitAudioContext;
+
+var con = new audio_context();
+
+
+
+function playSynth(){
+  var osc = con.createOscillator();
+  var amp = con.createGain();
+  osc.frequency.value += Math.random() * 500;
+
+  osc.connect(amp);
+
+  var now = con.currentTime;
+  amp.gain.value = 0;
+  amp.gain.linearRampToValueAtTime(0.2, now + 0.2);
+  amp.gain.linearRampToValueAtTime(0, now + 4);
+
+
+  osc.type='square';
+
+  amp.connect(con.destination);
+  osc.start();
+
+  osc.stop(now + 4.1);
+}
+
+
+</script>
+
+
+</html>

@@ -1,0 +1,73 @@
+
+
+<body>
+    <div
+    style="background:black;height:100%;color:white"
+    tabindex="1"
+    onmousemove="lfo.frequency.value = event.clientX;
+                osc.frequency.value = event.clientY;"
+    onkeydown="setNote(event.key)"
+          >
+    <h1>Welcome to the first<br>
+    programming exercise</h1>
+    <ul>
+        <li>Login and fork this code first!</li>
+        <li>Edit the code at the top in onmousemove<br>
+        so that it also changes the frequency of the 'osc'<br>
+        oscillator. It should use the mouse Y position. </li>
+        <li>Challenge: can you combine it with the <br>
+        keyboard controlled synth example?
+        </li>
+        <li>Done? back to the course!</li>
+
+    </ul>
+    </div>
+
+
+</body>
+<script>
+var audio_context = window.AudioContext || window.webkitAudioContext;
+
+var con = new audio_context();
+
+var osc = con.createOscillator();
+var lfo = con.createOscillator();
+
+var lfo_amp = con.createGain();
+lfo_amp.gain.value = 200;
+
+osc.frequency.value = 300;
+lfo.frequency.value = 15;
+
+lfo.connect(lfo_amp);
+lfo_amp.connect(osc.frequency);
+osc.connect(con.destination);
+
+osc.start();
+lfo.start();
+
+function setNote(key){
+  if (key ==" "){
+    //turn down osc
+    osc.frequency.value = 0;
+  }
+  if (key =="z"){
+    //play a c
+    osc.frequency.value = 261.63;
+  }
+  if (key =="x"){
+    //play a d
+    osc.frequency.value = 293.66;
+  }
+  if (key =="c"){
+    //play an e
+    osc.frequency.value = 329.63;
+  }
+  if (key =="v"){
+    //play a f
+    osc.frequency.value = 349.23;
+  }
+
+}
+
+</script>

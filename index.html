@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <script src="lfo.js">
+  </script>
+  <div
+      style="background:black; height:800px;"
+      onmousemove="osc.frequency.value=event.clientY;
+      lfo.frequency.value=event.clientX;"
+      tabindex="1";
+      onkeydown="setNote(event.key)"
+
+  >
+
+  </div>
+</body>
+</html>

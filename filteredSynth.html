@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <div
+      style="background:blue; height:500px;"
+      tabindex="1";
+      onmousemove="changeFilter(event.clientX,event.clientY)"
+      onkeydown="setNote(event.key)"
+  >
+
+  </div>
+</body>
+
+<script>
+
+var audio_context = window.AudioContext || window
+  .webkitAudioContext;
+
+var con = new audio_context();
+var osc = con.createOscillator();
+var filter = con.createBiquadFilter();
+
+osc.connect(filter);
+filter.connect(con.destination);
+//osc.connect(con.destination);
+
+osc.frequency.value = 300;
+filter.frequency.value = 200;
+
+osc.type='sawtooth';
+
+osc.start();
+
+function changeFilter(mx,my){
+  filter.frequency.value = mx * 3;
+  filter.Q.value = my / 16;
+}
+
+function setNote(key){
+  if (key ==" "){
+    //turn down osc
+    osc.frequency.value = 0;
+  }
+  if (key =="z"){
+    //play a c
+    osc.frequency.value = 261.63;
+  }
+  if (key =="x"){
+    //play a d
+    osc.frequency.value = 293.66;
+  }
+  if (key =="c"){
+    //play an e
+    osc.frequency.value = 329.63;
+  }
+  if (key =="v"){
+    //play a f
+    osc.frequency.value = 349.23;
+  }
+
+}
+
+
+</script>
+</html>
